@@ -1,0 +1,36 @@
+create table products (
+	id uuid not null default uuid_generate_v4() primary key,
+	title text not null,
+	description text,
+	price integer
+);
+
+create extension if not exists "uuid-ossp";
+
+create table stocks (
+	product_id uuid references products(id),
+	count integer
+);
+
+insert into 
+	products (title, description, price) 
+values 
+  ('Keyboard', 'Gaming keyboard', 14),
+  ('Mouse',	'Gaming mouse',	9),
+  ('Headset', 'Gaming headset',	17),
+  ('Mousepad', 'Gaming mousepad', 11),
+  ('Flash drive', 'A flash drive with 256GB memory', 22),
+  ('SSD Drive', 'SSD drive with a memory of 512GB', 45),
+  ('Curved Monitor', '34-inch Curved Monitor', 450)
+
+
+insert into
+	stocks (product_id, count)
+values
+	('c7079f92-d87d-4061-a373-669f831f64b4', 4),
+	('b5fdf0bb-11a6-4f8d-afdb-06f17ee2a767', 5),
+	('e48012de-070d-4f89-ae5e-693cf2766a4d', 7),
+	('c70f691a-fbda-4a8e-925c-59077e45a453', 7),
+	('59e1d40d-8132-4344-b7b9-d009454a66ff', 5),
+	('88e2dbd1-1b60-4d14-be00-dc2b88e4fcd7', 4),
+	('f01d5b01-cf2b-43a2-b71f-bce4781fe0cf', 2)
